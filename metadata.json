@@ -1,0 +1,6 @@
+{
+  "name": "TASE Summarization Portfolio",
+  "description": "Static frontend portfolio for browsing deterministic TASE disclosure summaries exported from the local Python pipeline.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
