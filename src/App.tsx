@@ -244,7 +244,7 @@ export default function App() {
                   <div className="rounded-[2.25rem] border border-slate-200 bg-white p-8 shadow-sm">
                     <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
                       <Sparkles className="h-4 w-4 text-amber-500" />
-                      Project overview
+                      System overview
                     </div>
                     <h1 className="mt-6 max-w-3xl font-heading text-5xl font-bold tracking-tight text-slate-950 sm:text-6xl">
                       TASE filing summaries, exported from a deterministic document-processing workflow.
@@ -291,7 +291,7 @@ export default function App() {
 
                 <section className="grid gap-6 lg:grid-cols-3">
                   <section className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
-                    <div className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Project context</div>
+                    <div className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">System context</div>
                     <div className="mt-4 space-y-4 text-sm leading-7 text-slate-600">
                       <p>
                         The source material comes from Tel Aviv Stock Exchange filings referenced through a local SQLite

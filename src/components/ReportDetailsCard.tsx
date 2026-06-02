@@ -161,7 +161,7 @@ export default function ReportDetailsCard({ report, onBack }: ReportDetailsCardP
           <div className="mt-4 space-y-4">
             <p className="text-sm leading-6 text-slate-600">
               Original filing metadata and the external source page come from TASE Maya. The PDF embedded below is the
-              local archived version used in this project.
+              local archived version used in this system.
             </p>
             <a
               href={mayaReportUrl}

@@ -20,9 +20,9 @@ export default function AboutSystem({ manifest, reports }: AboutSystemProps) {
           I build software that turns messy information into usable systems.
         </h2>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-600">
-          This project brings together the kind of work I enjoy most: document processing, structured exports,
+          This system brings together the kind of work I enjoy most: document processing, structured exports,
           and frontend interfaces that make complex information easier to browse. I am interested in building
-          products where accuracy, clarity, and practical implementation matter more than flashy claims.
+          systems where accuracy, clarity, and practical implementation matter more than flashy claims.
         </p>
       </section>
 
@@ -45,12 +45,12 @@ export default function AboutSystem({ manifest, reports }: AboutSystemProps) {
         </div>
 
         <div className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
-          <p className="text-xs uppercase tracking-[0.22em] text-slate-400">What this project demonstrates</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-slate-400">What this system demonstrates</p>
           <div className="mt-6 grid gap-4">
             <ReasonCard
               icon={<FileJson2 className="h-4 w-4" />}
               title="Document-to-product thinking"
-              body="The project starts with exchange disclosures and ends with a usable browsing interface, not just a script or dataset."
+              body="The system starts with exchange disclosures and ends with a usable browsing interface, not just a script or dataset."
             />
             <ReasonCard
               icon={<LayoutPanelTop className="h-4 w-4" />}
@@ -67,7 +67,7 @@ export default function AboutSystem({ manifest, reports }: AboutSystemProps) {
       </section>
 
       <section className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
-        <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Project context</p>
+        <p className="text-xs uppercase tracking-[0.22em] text-slate-400">System context</p>
         <div className="mt-4 grid gap-6 lg:grid-cols-2">
           <div>
             <h3 className="font-heading text-2xl font-bold text-slate-950">Why I built it</h3>
