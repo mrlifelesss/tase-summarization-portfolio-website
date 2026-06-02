@@ -244,7 +244,7 @@ export default function App() {
                   <div className="rounded-[2.25rem] border border-slate-200 bg-white p-8 shadow-sm">
                     <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
                       <Sparkles className="h-4 w-4 text-amber-500" />
-                      System overview
+                      <span lang="he" dir="rtl">נתחו את הודעות הבורסה בשניות</span>
                     </div>
                     <h1 className="mt-6 max-w-3xl font-heading text-5xl font-bold tracking-tight text-slate-950 sm:text-6xl">
                       TASE filing summaries, exported from a deterministic document-processing workflow.
