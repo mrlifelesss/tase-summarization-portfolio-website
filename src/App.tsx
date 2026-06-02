@@ -3,12 +3,13 @@ import { ArrowRight, Layers3, LoaderCircle, SearchX, Sparkles } from "lucide-rea
 
 import AboutSystem from "./components/AboutSystem";
 import DashboardStats from "./components/DashboardStats";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import ReportDetailsCard from "./components/ReportDetailsCard";
 import ReportsFilters from "./components/ReportsFilters";
 import ReportsList from "./components/ReportsList";
-import { getFormMeta, loadIndex, loadManifest, loadReportDetail } from "./lib/db";
+import { getFormMeta, loadFormsMeta, loadIndex, loadManifest, loadReportDetail } from "./lib/db";
 import type { ExportManifest, FilterState, ReportDetail, ReportIndexRecord, RouteState } from "./lib/types";
 
 const PERSONAL_PORTFOLIO_URL = "https://mrlifelesss.github.io/portfolio/";
@@ -81,7 +82,7 @@ export default function App() {
     let cancelled = false;
 
     setLoading(true);
-    Promise.all([loadManifest(), loadIndex()])
+    Promise.all([loadManifest(), loadIndex(), loadFormsMeta()])
       .then(([nextManifest, nextReports]) => {
         if (cancelled) {
           return;
@@ -366,7 +367,7 @@ export default function App() {
                             <span className="font-mono text-xs text-slate-400">{report.date_display}</span>
                           </div>
                           <h3 className="mt-5 font-heading text-2xl font-bold text-slate-950">{report.company}</h3>
-                          <p className="mt-3 text-sm leading-7 text-slate-900" dir="rtl">
+                          <p className="mt-3 text-sm leading-7 text-slate-900" dir="rtl" lang="he">
                             {report.tier1_one_liner}
                           </p>
                           <p className="mt-4 text-sm leading-6 text-slate-600">{meta.description}</p>
@@ -403,7 +404,9 @@ export default function App() {
                     writers={writers}
                     manifest={manifest}
                   />
-                  <ReportsList reports={filteredReports} onOpenReport={openReport} />
+                  <ErrorBoundary>
+                    <ReportsList reports={filteredReports} onOpenReport={openReport} />
+                  </ErrorBoundary>
                 </div>
               </div>
             )}
@@ -415,10 +418,12 @@ export default function App() {
                 {!selectedIndexRecord && !detailLoading && <ErrorState message={detailError ?? "Report not found in the current export."} />}
                 {detailLoading && <LoadingState compact />}
                 {!detailLoading && detail && (
-                  <ReportDetailsCard
-                    report={detail}
-                    onBack={() => navigateTo("/reports")}
-                  />
+                  <ErrorBoundary>
+                    <ReportDetailsCard
+                      report={detail}
+                      onBack={() => navigateTo("/reports")}
+                    />
+                  </ErrorBoundary>
                 )}
                 {!detailLoading && detailError && <ErrorState message={detailError} />}
               </div>

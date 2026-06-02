@@ -143,7 +143,7 @@ export default function ReportDetailsCard({ report, onBack }: ReportDetailsCardP
                 <GraduationCap className="h-4 w-4" />
                 Educational context
               </div>
-              <p className="mt-4 text-sm leading-7 text-emerald-950" dir="rtl">
+              <p className="mt-4 text-sm leading-7 text-emerald-950" dir="rtl" lang="he">
                 {report.payload.tier2.educational_narrative}
               </p>
             </section>
@@ -221,7 +221,7 @@ function LayerCard({
         {icon}
         {label}
       </div>
-      <p className={`mt-4 leading-7 text-slate-900 ${strong ? "text-lg font-semibold" : "text-sm"}`} dir="rtl">
+      <p className={`mt-4 leading-7 text-slate-900 ${strong ? "text-lg font-semibold" : "text-sm"}`} dir="rtl" lang="he">
         {title}
       </p>
     </section>

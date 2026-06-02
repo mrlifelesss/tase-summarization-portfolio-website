@@ -60,11 +60,11 @@ export default function ReportsList({ reports, onOpenReport }: ReportsListProps)
                 </div>
 
                 <div className="rounded-[1.5rem] bg-slate-50 p-4">
-                  <p className="text-sm font-semibold leading-7 text-slate-900" dir="rtl">
+                  <p className="text-sm font-semibold leading-7 text-slate-900" dir="rtl" lang="he">
                     {report.tier1_one_liner ?? "No tier 1 summary available."}
                   </p>
                   {report.summary_text && (
-                    <p className="mt-3 text-sm leading-7 text-slate-600" dir="rtl">
+                    <p className="mt-3 text-sm leading-7 text-slate-600" dir="rtl" lang="he">
                       {truncate(report.summary_text, 260)}
                     </p>
                   )}

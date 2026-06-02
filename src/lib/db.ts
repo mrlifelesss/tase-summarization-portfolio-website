@@ -4,6 +4,8 @@ const DATA_ROOT = (import.meta.env.VITE_DATA_BASE_URL || "/data").replace(/\/+$/
 
 let manifestPromise: Promise<ExportManifest> | null = null;
 let indexPromise: Promise<ReportIndexRecord[]> | null = null;
+let formsMetaPromise: Promise<Record<string, FormMetadata>> | null = null;
+let loadedFormsMeta: Record<string, FormMetadata> | null = null;
 const reportCache = new Map<string, Promise<ReportDetail>>();
 
 export const formMetadataMap: Record<string, FormMetadata> = {
@@ -81,6 +83,29 @@ export function buildMayaReportUrl(reportId: string): string {
   return `https://maya.tase.co.il/he/reports/companies/${encodeURIComponent(normalizedReportId)}`;
 }
 
+type FormsJsonEntry = { form_slug: string; title?: string; description?: string; accent?: string };
+
+export async function loadFormsMeta(): Promise<Record<string, FormMetadata>> {
+  if (!formsMetaPromise) {
+    formsMetaPromise = fetchJson<FormsJsonEntry[]>(buildDataUrl("forms.json"))
+      .then((entries) => {
+        const map: Record<string, FormMetadata> = {};
+        for (const entry of entries) {
+          if (entry.title && entry.description && entry.accent) {
+            map[entry.form_slug] = { title: entry.title, description: entry.description, accent: entry.accent };
+          }
+        }
+        loadedFormsMeta = Object.keys(map).length > 0 ? map : formMetadataMap;
+        return loadedFormsMeta;
+      })
+      .catch(() => {
+        loadedFormsMeta = formMetadataMap;
+        return formMetadataMap;
+      });
+  }
+  return formsMetaPromise;
+}
+
 export async function loadManifest(): Promise<ExportManifest> {
   if (!manifestPromise) {
     manifestPromise = fetchJson<ExportManifest>(buildDataUrl("manifest.json"));
@@ -103,7 +128,8 @@ export async function loadReportDetail(reportPath: string): Promise<ReportDetail
 }
 
 export function getFormMeta(formSlug: string, formType: string): FormMetadata {
-  return formMetadataMap[formSlug] ?? {
+  const map = loadedFormsMeta ?? formMetadataMap;
+  return map[formSlug] ?? {
     title: `${formType} · TASE filing`,
     description: "Structured filing exported from the deterministic summarization pipeline.",
     accent: "#334155",

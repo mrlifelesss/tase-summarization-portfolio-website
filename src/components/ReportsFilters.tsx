@@ -32,6 +32,7 @@ export default function ReportsFilters({ filters, onFilterChange, companies, wri
             value={filters.searchQuery}
             onChange={(event) => patch({ searchQuery: event.target.value })}
             placeholder="Search company, report ID, tier 1, or summary text"
+            aria-label="Search reports"
             className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-slate-900 focus:bg-white"
           />
         </div>
@@ -57,6 +58,7 @@ export default function ReportsFilters({ filters, onFilterChange, companies, wri
                   sortBy: "newest",
                 })
               }
+              aria-label="Reset all filters"
               className="text-xs font-medium text-slate-500 hover:text-slate-900"
             >
               Reset
@@ -101,6 +103,7 @@ export default function ReportsFilters({ filters, onFilterChange, companies, wri
                   <button
                     key={label}
                     onClick={() => patch({ writer })}
+                    aria-pressed={active}
                     className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
                       active ? "bg-slate-900 text-white" : "border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100"
                     }`}
@@ -122,6 +125,8 @@ export default function ReportsFilters({ filters, onFilterChange, companies, wri
                     key={form.form_slug}
                     onClick={() => patch({ formSlug: active ? "" : form.form_slug })}
                     title={meta.description}
+                    aria-pressed={active}
+                    aria-label={`Filter by ${meta.title}`}
                     className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
                       active ? "border-slate-900 bg-slate-900 text-white" : "border-slate-200 bg-white text-slate-700 hover:border-slate-900"
                     }`}
