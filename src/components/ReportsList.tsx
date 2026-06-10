@@ -25,9 +25,10 @@ export default function ReportsList({ reports, onOpenReport }: ReportsListProps)
     <div className="space-y-4">
       {reports.map((report) => {
         const meta = getFormMeta(report.form_slug, report.form_type);
+        const pageId = report.page_id ?? report.report_id;
         return (
           <article
-            key={`${report.form_slug}:${report.report_id}`}
+            key={`${report.form_slug}:${pageId}`}
             className="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-900 hover:shadow-lg"
           >
             <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
@@ -40,7 +41,7 @@ export default function ReportsList({ reports, onOpenReport }: ReportsListProps)
                     {report.form_type}
                   </span>
                   <span className="rounded-full border border-slate-200 px-3 py-1 font-mono text-[11px] text-slate-500">
-                    {report.report_id}
+                    {pageId}
                   </span>
                   {report.tier3_professional_analysis && (
                     <span className="rounded-full bg-slate-900 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
@@ -56,6 +57,11 @@ export default function ReportsList({ reports, onOpenReport }: ReportsListProps)
 
                 <div>
                   <h3 className="font-heading text-2xl font-bold text-slate-950">{report.company}</h3>
+                  {report.title && (
+                    <p className="mt-1 text-sm font-medium leading-6 text-slate-700" dir="rtl" lang="he">
+                      {report.title}
+                    </p>
+                  )}
                   <p className="mt-2 text-sm leading-6 text-slate-600">{meta.description}</p>
                 </div>
 

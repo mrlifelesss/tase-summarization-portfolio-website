@@ -1,6 +1,7 @@
 export type ExportManifest = {
   source_dir: string;
   generated_at: string;
+  page_suffix?: string;
   report_count: number;
   form_count: number;
   missing_pdf_count: number;
@@ -13,9 +14,11 @@ export type ExportManifest = {
 
 export type ReportIndexRecord = {
   report_id: string;
+  page_id?: string;
   form_type: string;
   form_slug: string;
   company: string;
+  title: string | null;
   date_display: string | null;
   date_iso: string | null;
   writer: string | null;
@@ -32,9 +35,11 @@ export type ReportIndexRecord = {
 
 export type ReportDetail = {
   report_id: string;
+  page_id?: string;
   form_type: string;
   form_slug: string;
   company: string;
+  title: string | null;
   date_display: string | null;
   date_iso: string | null;
   writer: string | null;

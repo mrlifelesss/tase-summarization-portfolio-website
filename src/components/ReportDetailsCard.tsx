@@ -13,9 +13,10 @@ export default function ReportDetailsCard({ report, onBack }: ReportDetailsCardP
   const meta = getFormMeta(report.form_slug, report.form_type);
   const pdfUrl = getReportPdfUrl(report);
   const mayaReportUrl = buildMayaReportUrl(report.report_id);
+  const pageId = report.page_id ?? report.report_id;
 
   const copyLink = async () => {
-    const value = `${window.location.origin}${window.location.pathname}#/reports/${report.form_slug}/${report.report_id}`;
+    const value = `${window.location.origin}${window.location.pathname}#/reports/${report.form_slug}/${pageId}`;
     try {
       await navigator.clipboard.writeText(value);
     } catch {
@@ -65,7 +66,7 @@ export default function ReportDetailsCard({ report, onBack }: ReportDetailsCardP
                 {report.form_type}
               </span>
               <span className="rounded-full border border-slate-200 px-3 py-1 font-mono text-[11px] text-slate-500">
-                {report.report_id}
+                {pageId}
               </span>
               <span className="rounded-full border border-slate-200 px-3 py-1 text-[11px] text-slate-500">
                 {report.writer ?? "Unknown writer"}
@@ -73,6 +74,11 @@ export default function ReportDetailsCard({ report, onBack }: ReportDetailsCardP
             </div>
 
             <h1 className="mt-4 font-heading text-4xl font-bold tracking-tight text-slate-950">{report.company}</h1>
+            {report.title && (
+              <p className="mt-2 max-w-3xl text-base font-medium leading-7 text-slate-700" dir="rtl" lang="he">
+                {report.title}
+              </p>
+            )}
             <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">{meta.description}</p>
 
             <dl className="mt-6 grid gap-4 text-sm text-slate-600 sm:grid-cols-3">

@@ -24,6 +24,10 @@ const defaultFilters: FilterState = {
   sortBy: "newest",
 };
 
+function getPageId(report: Pick<ReportIndexRecord, "report_id" | "page_id"> | Pick<ReportDetail, "report_id" | "page_id">): string {
+  return report.page_id ?? report.report_id;
+}
+
 function parseHash(hash: string): RouteState {
   const value = (hash || "#/").slice(1) || "/";
   if (value === "/") {
@@ -117,7 +121,7 @@ export default function App() {
     }
 
     const selectedReport = reports.find(
-      (report) => report.form_slug === route.formSlug && report.report_id === route.reportId,
+      (report) => report.form_slug === route.formSlug && getPageId(report) === route.reportId,
     );
 
     if (!selectedReport) {
@@ -171,6 +175,7 @@ export default function App() {
     const nextReports = reports.filter((report) => {
       if (query) {
         const haystack = [report.company, report.report_id, report.tier1_one_liner, report.summary_text]
+          .concat(report.page_id ? [report.page_id] : [])
           .filter(Boolean)
           .join(" ")
           .toLocaleLowerCase();
@@ -217,7 +222,7 @@ export default function App() {
 
   const selectedIndexRecord =
     route.kind === "detail"
-      ? reports.find((report) => report.form_slug === route.formSlug && report.report_id === route.reportId) ?? null
+      ? reports.find((report) => report.form_slug === route.formSlug && getPageId(report) === route.reportId) ?? null
       : null;
 
   const navigateTo = (path: string) => {
@@ -225,7 +230,7 @@ export default function App() {
   };
 
   const openReport = (report: ReportIndexRecord) => {
-    navigateTo(`/reports/${report.form_slug}/${report.report_id}`);
+    navigateTo(`/reports/${report.form_slug}/${getPageId(report)}`);
   };
 
   return (
