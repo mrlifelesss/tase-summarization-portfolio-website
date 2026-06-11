@@ -42,7 +42,7 @@ function parseHash(hash: string): RouteState {
   if (value.startsWith("/reports/")) {
     const [, , formSlug, reportId] = value.split("/");
     if (formSlug && reportId) {
-      return { kind: "detail", formSlug, reportId };
+      return { kind: "detail", formSlug, reportId: decodeURIComponent(reportId) };
     }
   }
   return { kind: "home" };
